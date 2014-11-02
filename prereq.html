@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rutgers CS / ECE Prerequisite Tree</title>
+  </head>
+  <body>
+	  <p>
+	This is a joint prereq tree for Computer Science and Electical/Computer Engineering at Rutgers. It's intended for people like me who are double majoring, to clarify equivalencies.
+	As such, I've left out a whole bunch of Electrical Engineering electives, so check the handbook if that's of interest.
+	  </p>
+	  <p>
+
+	  </p>
+    
+    <script type="text/vnd.graphviz" id="cluster">
+digraph G {
+
+	subgraph cluster_math {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		label = "Math";
+		M151 -> M152
+		M152 -> M250
+		M152 -> M251
+		M251 -> M244
+		M152 -> M300
+		M300 -> M348 //cryptography
+		M250 -> M348
+		M250 -> M338 //prob bio
+		M251 -> M338
+		M250 -> M354 //linear optimization
+		M251 -> M428 //graph theory
+		M250 -> M428
+		M251 -> M461 //math logic
+		M300 -> M461
+	}
+
+	subgraph cluster_cs {
+		node [style=filled];
+		label = "Computer Science";
+		//core requirements
+		CS111 [fillcolor = lightblue]
+		CS112 [fillcolor = lightblue]
+		CS205 [fillcolor = lightblue]
+		CS211 [fillcolor = lightblue]
+		CS206 [fillcolor = lightblue]
+		CS344 [fillcolor = lightblue]
+
+		subgraph cluster_trio {
+			label = "111+112+213 / 111+112+214"
+			color = red
+			CS111
+			CS112
+			CS213
+			CS214
+		}
+
+		CS111 -> CS112
+		CS111 -> CS205
+		CS112 -> CS211
+		CS112 -> CS428
+		CS112 -> CS334
+		CS112 -> CS344
+		CS112 -> CS336
+		CS112 -> CS213
+		CS205 -> CS206
+		CS205 -> CS314
+		CS205 -> CS336
+		CS211 -> CS352
+		CS211 -> CS314
+		CS211 -> CS415
+		CS211 -> CS214
+		CS206 -> CS334
+		CS206 -> CS344
+		CS206 -> CS352
+		CS214 -> CS437
+		CS214 -> CS416
+		CS213 -> CS431
+		CS323
+		CS344 -> CS452
+		CS314 -> CS440
+		CS314 -> CS415
+		CS336 -> CS437
+		CS416 -> CS417
+	}
+
+	M151 -> CS112
+	M250 -> CS323
+	M250 -> CS334
+	M250 -> CS428
+	CS206 -> M338
+
+	subgraph cluster_ece {
+		node [style=filled];
+		label = "ECE";
+		//ECE requirements
+		ECE221 [fillcolor = lightgreen]
+		ECE222 [fillcolor = lightgreen]
+		ECE226 [fillcolor = lightgreen]
+		ECE347 [fillcolor = lightgreen]
+		ECE312 [fillcolor = lightgreen]
+		ECE361 [fillcolor = lightgreen]
+		ECE231 [fillcolor = lightgreen]
+		ECE252 [fillcolor = lightgreen]
+		ECE331 [fillcolor = lightgreen]
+
+		//EE specific
+		ECE346 [fillcolor = yellow]
+
+		//CE specific
+		ECE351 [fillcolor = pink]
+		ECE452 [fillcolor = pink]
+		ECE437 [fillcolor = pink]
+		ECE434 [fillcolor = pink]
+
+		//capstones
+		//CAPopto  [shape = Mdiamond]
+		//CAPmicro [shape = Mdiamond]
+		//CAPelect [shape = Mdiamond]
+		//CAPcontr [shape = Mdiamond]
+		//CAPwirel [shape = Mdiamond]
+		//CAPcomms [shape = Mdiamond]
+		CAPdsp [shape = Mdiamond]
+		CAPvr [shape = Mdiamond]
+		CAPcv [shape = Mdiamond]
+		CAPsoft [shape = Mdiamond]
+		CAPdigi [shape = Mdiamond]
+		CAPvlsi [shape = Mdiamond]
+
+		subgraph cluster_trio_ece {
+			label = "Need 1 more ECE elective if doing these in CS"
+			color = red
+			ECE252
+			ECE351
+		}
+
+		ECE221 -> ECE222 //pee ii
+		ECE221 -> ECE226 //probability
+		ECE222 -> ECE361 //ED
+		ECE222 -> ECE347 //LSS
+		ECE226 -> ECE312 //discrete math
+		ECE361 -> ECE366 //digital electronics
+		ECE347 -> ECE346 //digital signal processing
+		ECE346 -> ECE447 //DSP design
+		ECE447 -> CAPdsp
+		ECE347 -> ECE472 //CV
+		ECE472 -> CAPcv
+
+		ECE231 -> ECE312
+		ECE312 -> ECE424 //network security
+		ECE231 -> ECE331 //comp arch
+		ECE252 -> ECE351 //prog meth ii
+		ECE252 -> ECE452 //software engineering
+		ECE351 -> ECE456 //network centric prog
+		ECE351 -> ECE474 //graphics
+		ECE351 -> ECE451 //parallel prog
+		ECE452 -> CAPsoft
+		ECE451 -> CAPsoft
+		ECE331 -> ECE437 //digital system
+		ECE437 -> CAPdigi
+		ECE331 -> ECE479 //VLSI
+		ECE336 -> ECE479
+		ECE331 -> ECE376 //VR
+		ECE376 -> CAPvr
+		ECE331 -> ECE434 //intro to computer systems
+
+		ECE479 -> ECE482 //deep submicron
+		ECE479 -> CAPvlsi
+
+	}
+	M244 -> ECE347
+	MATLAB -> ECE231 //DLD
+	MATLAB -> ECE252 //prog meth i
+	ECE231 -> CS416 [style=dashed]
+
+	//equivs
+	CS205 -> ECE312 [arrowhead=none, style=dashed, color=green] 
+	M300 -> ECE312 [arrowhead=none, style=dashed, color=green] 
+	M300 -> CS205 [arrowhead=none, style=dashed, color=green] 
+
+	CS206 -> ECE226 [arrowhead=none, style=dashed, color=red] 
+
+	CS211 -> ECE331 [arrowhead=none, style=dashed, color=blue] 
+	
+	CS431 -> ECE452 [arrowhead=none, style=dashed, color=orange] 
+}
+</script>
+    
+
+    <script src="viz.js"></script>
+    <script>
+      
+      function inspect(s) {
+        return "<pre>" + s.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;") + "</pre>"
+      }
+      
+      function src(id) {
+        return document.getElementById(id).innerHTML;
+      }
+      
+      function example(id, format, engine) {
+        var result;
+        try {
+          result = Viz(src(id), format, engine);
+          if (format === "svg")
+            return result;
+          else
+            return inspect(result);
+        } catch(e) {
+          return inspect(e.toString());
+        }
+      }
+      document.body.innerHTML += example("cluster", "svg");
+    </script>
+    
+  </body>
+</html>
+
